@@ -23,7 +23,7 @@ const Mediacard = ({ slice, addonCart, removefromCart }) => {
             >
               <div className={`${styles.img_responsive} ${styles.figure}  `}>
                 <Link
-                  href={`/seedetails/${item.category_name}/${item.page_title}`}
+                  href={`/seedetails/${item.category_name}/${item.page_title}?code=${item.code}`}
                   className="text-decoration-none"
                 >
                   <Image
@@ -54,7 +54,7 @@ const Mediacard = ({ slice, addonCart, removefromCart }) => {
 
                 <figcaption className="rounded-top">
                   <Link
-                    href={`/seedetails/${item.category_name}/${item.page_title}`}
+                    href={`/seedetails/${item.category_name}/${item.page_title}?code=${item.code}`}
                     className="text-decoration-none"
                   >
                     <span className={styles.project_details}>

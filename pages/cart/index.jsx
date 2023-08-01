@@ -186,7 +186,7 @@ const Cart = () => {
                             >
                               <div className="col-4 pe-0 me-0 ">
                                 <Link
-                                  href={`/seedetails/${obj.category_name}/${obj.page_title}`}
+                                  href={`/seedetails/${obj.category_name}/${obj.page_title}?code=${obj.code}`}
                                   className="text-decoration-none"
                                 >
                                   <Image
@@ -222,7 +222,7 @@ const Cart = () => {
                                 <div className="card-body ps-4 pt-1 pt-md-0">
                                   <h4 className={`${styles.card_title} pt-1`}>
                                     <Link
-                                      href={`/seedetails/${obj.category_name}/${obj.page_title}`}
+                                      href={`/seedetails/${obj.category_name}/${obj.page_title}?code=${obj.code}`}
                                       className="text-decoration-none"
                                     >
                                       <span className="text-dark">

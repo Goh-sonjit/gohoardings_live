@@ -245,10 +245,11 @@ export const allcompanydata = async () => {
   return data
 }
 
-export const singlemnedia = async(page_title, category_name) =>{
+export const singlemnedia = async(page_title, category_name,code) =>{
   const { data } = await instance.post("seedetails", {
     page_title,
     category_name,
+    code
   });
   return data
 }
@@ -384,4 +385,5 @@ export const goh_testimonialsApi = async () => {
   console.log(data);
   return data
 }
+
 

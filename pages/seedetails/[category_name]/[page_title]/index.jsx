@@ -22,10 +22,10 @@ import Image from "next/image";
 import axios from "axios";
 
 const Details = (props) => {
-  const Canonicaltag = props.currentPageUrl;
-const metaData=props.apiData;
+  const Canonicaltag = props.currentPageUrlSort;
+  const metaData = props.apiData;
   const router = useRouter();
-  const { category_name, page_title } = router.query;
+  const { category_name, page_title, code } = router.query;
   const { addRemove } = useContext(AccountContext);
   const { handleShow } = useContext(AccountContext);
   const [markers, setPosts] = useState([]);
@@ -63,21 +63,22 @@ const metaData=props.apiData;
       }
     }
   };
-  const mapData = async (page) => {
-    setCookie("page_title", page);
+  const mapData = async (item) => {
+    setCookie("page_title", item.meta_title);
+    setCookie("item_code", item.code);
     router.push("/map");
   };
 
   const getMedia = async () => {
-    if (category_name && page_title) {
+    if (category_name && page_title && code) {
       const { data } = await instance.post("seedetails", {
         page_title: page_title,
         category_name: category_name,
+        code: code,
       });
       setPosts(data);
     }
   };
-
 
   const addonCart = async (e) => {
     const data = await addItem(e.code, e.category_name);
@@ -118,14 +119,13 @@ const metaData=props.apiData;
 
   useEffect(() => {
     getMedia();
-  }, [category_name,page_title]);
+  }, [category_name, page_title]);
 
   return (
     <>
       {metaData.map((item, i) => (
         <Head key={i}>
           <link
-
             rel="canonical"
             href={`https://www.gohoardings.com${Canonicaltag}`}
           />
@@ -141,7 +141,7 @@ const metaData=props.apiData;
           />
           <meta name="keywords" content={item.meta_keywords} />
         </Head>
-     ))} 
+      ))}
       <Fixednavbar />
       {markers == 0 ? (
         <>
@@ -159,20 +159,6 @@ const metaData=props.apiData;
                 className="container-xxl  container-xl container-lg container-md detail-container animate__animated  animate__fadeIn"
                 key={i}
               >
-                <h6>
-                  <span onClick={() => router.push("/")} className="bredcamp">
-                    Home
-                  </span>
-                  <MdKeyboardArrowRight />
-                  <span
-                    className="bredcamp"
-                    onClick={() => router.push("/traditional-ooh-media")}
-                  >
-                    Medias
-                  </span>
-                  <MdKeyboardArrowRight />
-                  <span className="bredcamp text-secondary">Details</span>
-                </h6>
                 <div className="row mt-3 mt-md-5 ms-md-3 me-md-3 ms-0 me-0 detail-mg p-1 p-md-3 rounded-3">
                   <div className="col-md-6 p-0">
                     <Carousel showThumbs={false} infiniteLoop={true}>
@@ -247,8 +233,7 @@ const metaData=props.apiData;
                     </div>
                     <p>
                       The hoarding is placed in prime loaction. It is visible
-                      from all the <br />
-                      crossing roads covering maximum views.
+                      from all the crossing roads covering maximum views.
                     </p>
                     <div className="row p-0">
                       <div className=" col-6 position-relative">
@@ -259,7 +244,7 @@ const metaData=props.apiData;
                       <div className="col-2">
                         <div
                           className="location p-2 text-center rounded"
-                          onClick={(element) => mapData(item.meta_title)}
+                          onClick={(element) => mapData(item)}
                         >
                           <MdLocationPin
                             className="icon-clr me-4 me-md-0 mt-1 mt-md-0"
@@ -313,7 +298,7 @@ const metaData=props.apiData;
                 </div>
 
                 {/* form section */}
-                <div className="detail-form p-3 rounded-3 my-md-5 my-4">
+                <div className="detail-form p-3 rounded-3 my-md-5 my-4 mb-md-3">
                   <>
                     <h1 className="txt-clr-tlk fw-bold">
                       Get a Free Consultation!
@@ -423,6 +408,20 @@ const metaData=props.apiData;
                     </form>
                   </>
                 </div>
+                <h6 className="my-4">
+                  <span onClick={() => router.push("/")} className="bredcamp">
+                    Home
+                  </span>
+                  <MdKeyboardArrowRight />
+                  <span
+                    className="bredcamp"
+                    onClick={() => router.push("/traditional-ooh-media")}
+                  >
+                    Medias
+                  </span>
+                  <MdKeyboardArrowRight />
+                  <span className="bredcamp text-secondary">Details</span>
+                </h6>
               </div>
             </>
           ))}
@@ -431,7 +430,7 @@ const metaData=props.apiData;
       <style jsx>
         {`
     .detail-container {
-      margin-top: 9%;
+      margin-top: 6%;
     }   
       h2 {
         font-size: 2.1rem;
@@ -598,47 +597,60 @@ const metaData=props.apiData;
   );
 };
 
-
-
 Details.getInitialProps = async ({ req, res }) => {
   let currentPageUrl = "";
   let category2 = "";
   let details2 = "";
+  let code1 = "";
+  let currentPageUrlSort="";
 
   if (req) {
     currentPageUrl = req.url;
-    const urlParts = currentPageUrl.split('/');
+    currentPageUrlSort= currentPageUrl.split("?")[0];
+    const urlParts = currentPageUrl.split("/");
     category2 = urlParts[2];
-    details2 = urlParts[3];
+    details2 = urlParts[3].split("?")[0];
+    const queryString = currentPageUrl.split("?")[1];
+    if (queryString) {
+      const codeParam = queryString.split("code=")[1];
+      code1 = codeParam ? codeParam : "";
+    }
   } else if (res) {
     currentPageUrl = res.socket.parser.incoming.originalUrl;
-    const urlParts = currentPageUrl.split('/');
+    currentPageUrlSort= currentPageUrl.split("?")[0];
+    const urlParts = currentPageUrl.split("/");
     category2 = urlParts[2];
-    details2 = urlParts[3];
+    details2 = urlParts[3].split("?")[0];
+    const queryString = currentPageUrl.split("?")[1];
+    if (queryString) {
+      const codeParam = queryString.split("code=")[1];
+      code1 = codeParam ? codeParam : "";
+    }
   }
 
   // Call the API and get the data
   let apiData = [];
-  if (category2 && details2) {
+  if (category2 && details2 && code1) {
+
     try {
-      const response = await axios.post("https://www.gohoardings.com/api/seedetails", {
-        page_title: details2,
-        category_name: category2,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/seedetails",
+        {
+          page_title: details2,
+          category_name: category2,
+          code: code1,
+        }
+      );
       apiData = response.data;
     } catch (error) {
       // Handle API error if needed
-      console.error('API Error:', error);
+      console.error("API Error:", error);
     }
   }
 
   return {
-    currentPageUrl,
-    apiData
+    currentPageUrlSort,
+    apiData,
   };
 };
-
-
-
-
 export default Details;

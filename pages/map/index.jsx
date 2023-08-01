@@ -39,6 +39,7 @@ const Map = () => {
   const state_name = getCookie("state_name");
   const category_name = getCookie("category_name");
   const page_title = getCookie("page_title");
+  const code = getCookie("item_code");
 
   const getData = async () => {
     if (state_name) {
@@ -46,8 +47,8 @@ const Map = () => {
 
       const data = await statemediaApi(state_name, pages);
       setSearch(data);
-    } else if (page_title) {
-      const data = await singlemnedia(page_title, category_name);
+    } else if (page_title && code) {
+      const data = await singlemnedia(page_title, category_name,code);
       setSearch(data);
     } else if (category_name) {
       const data = await mediaDataApi(category_name, city_name);

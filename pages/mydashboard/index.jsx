@@ -324,7 +324,7 @@ const Index = () => {
                                           <td>{el.start_date.slice(0, 10)}</td>
                                           <td>{el.end_date.slice(0, 10)}</td>
                                           <Link
-                                            href={`/seedetails/${el.media_type}/${el.page_title}`}
+                                            href={`/seedetails/${el.media_type}/${el.page_title}?code=${el.code}`}
                                             className="text-decoration-none"
                                           >
                                             <td className="text-light">View</td>
