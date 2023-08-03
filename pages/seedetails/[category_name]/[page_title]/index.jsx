@@ -129,7 +129,7 @@ const Details = (props) => {
             rel="canonical"
             href={`https://www.gohoardings.com${Canonicaltag}`}
           />
-          <title>{item.page_title}</title>
+          <title>{item.page_title.replace(/-/g, " ")}</title>
           <meta charSet="utf-8" />
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -602,11 +602,11 @@ Details.getInitialProps = async ({ req, res }) => {
   let category2 = "";
   let details2 = "";
   let code1 = "";
-  let currentPageUrlSort="";
+  let currentPageUrlSort = "";
 
   if (req) {
     currentPageUrl = req.url;
-    currentPageUrlSort= currentPageUrl.split("?")[0];
+    currentPageUrlSort = currentPageUrl.split("?")[0];
     const urlParts = currentPageUrl.split("/");
     category2 = urlParts[2];
     details2 = urlParts[3].split("?")[0];
@@ -617,7 +617,7 @@ Details.getInitialProps = async ({ req, res }) => {
     }
   } else if (res) {
     currentPageUrl = res.socket.parser.incoming.originalUrl;
-    currentPageUrlSort= currentPageUrl.split("?")[0];
+    currentPageUrlSort = currentPageUrl.split("?")[0];
     const urlParts = currentPageUrl.split("/");
     category2 = urlParts[2];
     details2 = urlParts[3].split("?")[0];
@@ -631,7 +631,6 @@ Details.getInitialProps = async ({ req, res }) => {
   // Call the API and get the data
   let apiData = [];
   if (category2 && details2 && code1) {
-
     try {
       const response = await axios.post(
         "http://localhost:3000/api/seedetails",
