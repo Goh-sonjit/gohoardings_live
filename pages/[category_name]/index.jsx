@@ -1,19 +1,15 @@
 import Fixednavbar from "@/components/navbar/fixednavbar";
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import {
-  CityNameImage,
-  mediaApi,
-  getCityDataApi,
-} from "@/allApi/apis";
+import { CityNameImage, mediaApi, getCityDataApi } from "@/allApi/apis";
 
 import MainUi from "@/components/mediaComponents/MainUi";
 import dynamic from "next/dynamic";
 const Media = (props) => {
   const ErrorPage = dynamic(() => import("../404"));
   const Metatag = props.MetaKeys;
- const Media_content = props.Media_content;
+  const Media_content = props.Media_content;
   const Canonicaltag = props.currentPageUrl;
   const [noOfLogo, setnoOfLogo] = useState(16);
   const router = useRouter();
@@ -26,9 +22,8 @@ const Media = (props) => {
   const { category_name } = router.query;
 
   const SelectServc = async (obj) => {
- 
     CityNameImage.forEach((el) => {
-      el.value2 = el.value === obj.value? true : false;
+      el.value2 = el.value === obj.value ? true : false;
     });
     router.push(`/${obj.value}`);
   };
@@ -59,7 +54,6 @@ const Media = (props) => {
     apiforFillters();
   }, [category_name, noOfLogo]);
 
- 
   const onSearch = async (searchCity) => {
     setValue(searchCity);
     setFocus(false);
@@ -82,9 +76,8 @@ const Media = (props) => {
     "mumbai",
     "hyderabad",
   ];
-  if (
-   validCategories.includes(category_name)
-  ) {
+
+  if (validCategories.includes(category_name)) {
     return (
       <>
         <Head>
@@ -113,6 +106,29 @@ const Media = (props) => {
                     content="fLT70DRZGdH5FUdrS8w1k2Zg_VTzNJGDF9ie9v4FAzM"
                   />
                   <meta name="keywords" content={el.meta_keyword} />
+                  <meta property="og:title" content={el.page_titel} />
+                  <meta property="og:siteName" content={el.meta_keyword} />
+                  <meta property="og:description" content={el.page_decri} />
+                  <meta property="og:type" content="en_US" />
+                  <meta property="og:image" href={el.thumb} />
+                  <meta
+                    property="og:url"
+                    href={`https://www.gohoardings.com${Canonicaltag}`}
+                  />
+                  <meta property="og:property" content="en_US" />
+                  <meta property="twitter:title" content={el.page_titel} />
+                  <meta property="twitter:siteName" content={el.meta_keyword} />
+                  <meta
+                    property="twitter:description"
+                    content={el.page_decri}
+                  />
+                  <meta property="twitter:type" content="en_US" />
+                  <meta property="twitter:image" href={el.thumb} />
+                  <meta
+                    property="twitter:url"
+                    href={`https://www.gohoardings.com${Canonicaltag}`}
+                  />
+                  <meta property="twitter:property" content="en_US" />
                 </>
               );
             }
@@ -141,11 +157,11 @@ const Media = (props) => {
       </>
     );
   } else {
-   return(
-    <>
-    <ErrorPage/>
-    </>
-   )
+    return (
+      <>
+        <ErrorPage />
+      </>
+    );
   }
 };
 
@@ -223,11 +239,11 @@ Media.getInitialProps = async ({ req, res }) => {
         "Inflight Advertising, Advertising in Hello 6E Magazine, Advertising in Indigo In-flight Magazine, Advertising in Spice Route Magazine, Advertising in Spice Jet In-flight Magazine, Advertising in Go Air In-flight Magazine, Advertising in Jet Wings Magazine, Advertising in Jet Airways Inflight Magazine, Advertising in Air India Inflight Magazine, Advertising in Shubh Yatra Magazine, Advertising in Go Getter Inflight Magazine, Advertising on Airport  Luggage Trolleys, Advertising on Meal Tray in Airlines, Advertising on Seat Back Devices, Advertising in Vistara inflight Magazine",
     },
   ];
- const { Media_content } = await import("@/allApi/mediajson");
+  const { Media_content } = await import("@/allApi/mediajson");
   return {
     MetaKeys,
     currentPageUrl,
-   Media_content 
+    Media_content,
   };
 };
 

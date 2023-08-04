@@ -316,7 +316,7 @@ const Markers = ({
                         <div className={styles.infoWindow}>
                           <div className={styles.media_image}>
                             <Link
-                              href={`/seedetails/${category_name}/${page_title}?code=${code}`}
+                              href={`/seedetails/${category_name}/${page_title}/${code}`}
                               className="text-decoration-none"
                             >
                               <Image
@@ -346,7 +346,7 @@ const Markers = ({
 
                           <div className={`${styles.info_window} bg-white`}>
                             <Link
-                              href={`/seedetails/${category_name}/${page_title}?code=${code}`}
+                              href={`/seedetails/${category_name}/${page_title}/${code}`}
                               className="text-decoration-none"
                             >
                               <h5 className=" text-dark">
