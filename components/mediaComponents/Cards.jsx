@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { MdLocalOffer } from "react-icons/md";
 import Link from "next/link";
 import styles from "@/styles/mediaN.module.scss";
@@ -6,22 +7,41 @@ import Loader from "@/components/loader";
 import Image from "next/image";
 
 const Mediacard = ({ slice, addonCart, removefromCart }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+      setIsLoading(false);
+  }, [slice]);
+
   return (
     <>
-      {slice.length == 0 ? (
+      {isLoading ? (
         <div className="container ">
           <div className={`${styles.no_data} row  text-center my-3`}>
             <Loader />
+          </div>
+        </div>
+      ) : 
+      slice.length === 0 ? (
+        <div className="container ">
+          <div className={`${styles.no_data} row  text-center my-3`}>
+            <Image
+              width={200}
+              height={200}
+              alt="no-data"
+              style={{opacity:".7"}}
+              src="/images/web_pics/no-data.png"
+            />
           </div>
         </div>
       ) : (
         <div className={styles.card_media}>
           {slice.map((item, i) => (
             <div
-              className={`${styles.project}   mt-2  animate__animated  animate__fadeIn`}
+              className={`${styles.project} mt-2 animate__animated animate__fadeIn`}
               key={i}
             >
-              <div className={`${styles.img_responsive} ${styles.figure}  `}>
+              <div className={`${styles.img_responsive} ${styles.figure}`}>
                 <Link
                   href={`/seedetails/${item.category_name}/${item.page_title}/${item.code}`}
                   className="text-decoration-none"
@@ -61,12 +81,12 @@ const Mediacard = ({ slice, addonCart, removefromCart }) => {
                       {item.subcategory} at {item.medianame.substring(0, 6)}...
                     </span>
                   </Link>
-                  <span className={`${styles.project_creator} mt-2 ms-0 `}>
+                  <span className={`${styles.project_creator} mt-2 ms-0`}>
                     <HiOutlineCurrencyRupee
                       className={`${styles.rupees_logo} icon-clr`}
                     />{" "}
                     Price {""}
-                    <span className={`text-muted `}>
+                    <span className={`text-muted`}>
                       {" "}
                       {parseInt((item.price * 11) / 10 / 30)}{" "}
                     </span>

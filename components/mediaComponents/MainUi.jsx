@@ -50,6 +50,9 @@ const MainUi = ({
     setFocus(true);
     setCity(data);
   };
+
+  
+
   let slice;
   if (search.success != false) {
     slice = search.slice(0, noOfLogo);

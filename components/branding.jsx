@@ -68,7 +68,7 @@ const Branding = (props) => {
             text-align: center;
           }
           
-          @media screen and (max-width: 425px) {
+          @media screen and (max-width: 540px) {
               .logo {
                   position: absolute;
                   top: 15px;

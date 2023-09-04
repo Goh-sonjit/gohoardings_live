@@ -22,7 +22,6 @@ const Searchmedia = () => {
   };
 
   const mavigatetoMediaPage = (userType, value) => {
-
     if (userType.length > 3 && value.length > 2) {
       setCookie("category_name", userType);
       setCookie("city_name", value);
@@ -30,7 +29,6 @@ const Searchmedia = () => {
       CityNameImage.forEach((el) => {
         el.value2 = el.value === userType ? true : false;
       });
-
 
       route.push(`/${userType}/${value}`);
     }
@@ -46,7 +44,7 @@ const Searchmedia = () => {
       <div
         className={`${styles.search_media_content} container-xxl  container-xl container-lg container-md mb-4  ms-xs-3`}
       >
-        <div className="row mt-4 mt-md-0">
+        <div className="row mt-5 mt-md-0">
           <div className="col-md-8 ps-2 ps-md-0">
             <div className={`${styles.heading_text} mt-4`}>
               <h2>India&#39;s Largest</h2>

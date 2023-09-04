@@ -3,19 +3,23 @@
 .mobilenav{
     display: none;
     background-color: #212121;
+   
     // opacity: 89%;
 }
-@media screen and (max-width:425px) {
+@media screen and (max-width:540px) {
     .mobilenav{
         display: block;
+        display: flex;
+        justify-content: space-between;
       
     }
   }
 
 .navbrand{
-    width: 45vw;
+    width: auto;
 }
 .search_logo{
     color: white;
-    font-size: 6vw;
+    font-size: 9.5vw;
+  
 }

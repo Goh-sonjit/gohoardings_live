@@ -44,7 +44,7 @@ const Ourservices = () => {
           },
         },
         {
-          breakpoint: 425,
+          breakpoint: 540,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -130,7 +130,7 @@ const Ourservices = () => {
                 <span
                   className={`${styles.button_serch} text-white rounded-pill`}
                 >
-                  <Link href="/traditional-ooh-media-advertising">
+                  <Link href="/traditional-ooh-media">
                     <button
                       className={styles.search_btn}
                       onClick={directlinkget}

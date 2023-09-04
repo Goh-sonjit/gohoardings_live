@@ -10,7 +10,6 @@ exports.companyStaff = catchError(async (req, res, next) => {
         } else {
             return res.status(200).json(data)
         }
- 
 })
 
 exports.goh_quick_links = catchError(async (req, res, next) => {

@@ -80,8 +80,9 @@
       font-size: small;
     }
   }
-  @media screen and (max-width: 425px) {
-    br{
+  @media screen and (max-width: 540px) {
+ 
+    br,.icon_clr{
       display: none;
         }
     // h1 {
@@ -115,7 +116,8 @@
 
 
       .celebration_logo {
-        height: 43px;
+        height: 35px;
+        width: 35px;
       }
 
       .search_btn {

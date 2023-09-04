@@ -54,9 +54,9 @@ const City = () => {
   ];
 
   return (
-    <div className="citylist m-0 mt-3 mt-md-5  py-md-4">
+    <div className="citylist m-0 mt-4 mt-md-5  py-md-4 ">
       <section>
-        <h1 className="text-center text-nowrap pt-2 pt-md-0">
+        <h1 className="text-center text-nowrap pt-3 pt-md-0">
           Explore your City Listings
         </h1>
         <h6 className=" text-center">
@@ -66,7 +66,7 @@ const City = () => {
         </h6>
       </section>
 
-      <div className="container mt-5 ">
+      <div className="container mt-4 mt-md-5 ">
         <div className="row">
           {City.slice(0, 3).map((e, i) => (
             <div className="col col-md-4" key={i}>
@@ -184,7 +184,7 @@ const City = () => {
         }
 
 
-        @media screen and (max-width: 425px) {
+        @media screen and (max-width: 540px) {
           #citygh{
             
             padding: 0px!important ;
@@ -208,6 +208,7 @@ const City = () => {
               bottom: 0px;
               color: #fff;
               left: 5px;
+              font-weight: 500;
               font-size: .8rem;
             }
 
@@ -215,8 +216,8 @@ const City = () => {
             .bottom-left-media {
               bottom: 14px;
               left: 5px;
-              font-size: .9rem;
-              font-weight: 600;
+              font-size: .7rem;
+              font-weight: 400;
               padding-right: 0px;
             }
             .bottom-left-media-text {

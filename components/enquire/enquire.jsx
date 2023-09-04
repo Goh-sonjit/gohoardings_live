@@ -36,7 +36,7 @@ const Enquire = () => {
           },
         },
         {
-          breakpoint: 425,
+          breakpoint: 540,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
@@ -69,7 +69,7 @@ const Enquire = () => {
            </div>
          ))}
        </Slider>
-   </section>
+     </section>
       <div className={`container-xxl  container-xl container-lg container-md ${styles.enquire_content} py-2 py-md-5 my-md-3 px-md-5 `}>
         <div className={`row p-2 ${styles.enquire_description_row}`}>
           <div className={` col-md-4  p-4 p-md-3  ${styles.enquire_description} col-xs-0`}>

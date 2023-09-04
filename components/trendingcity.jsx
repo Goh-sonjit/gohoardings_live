@@ -200,7 +200,7 @@ const Trendingcity = () => {
             }
           }
 
-          @media screen and (max-width: 425px) {
+          @media screen and (max-width: 540px) {
             .trending-contain {
               display: none;
             }

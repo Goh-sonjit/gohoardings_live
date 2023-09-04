@@ -4,7 +4,6 @@ const catchError = require('../middelware/catchError')
 const redis = require('redis');
 const ErrorHandle = require("../utils/Errorhandler");
 const client = redis.createClient()
-
  client.connect()
 
 
@@ -204,7 +203,7 @@ exports.mediaData = catchError(async (req, res, next) => {
 
 exports.getCityData = catchError(async (req,res, next) => {
     const {city} = req.body;
-        const data = "mediaownercompanyname, thumb, category_name, meta_title, page_title,subcategory, medianame, price, meta_keywords, meta_descriptions" 
+        const data = "mediaownercompanyname, thumb, category_name, meta_title, page_title,subcategory, medianame, price, meta_keywords, meta_descriptions,code" 
        const result  =  await executeQuery("SELECT "+data+" FROM goh_media WHERE city_name = '" + city + "' UNION SELECT "+data+" FROM goh_media_digital WHERE city_name = '" + city + "' UNION SELECT "+data+" FROM goh_media_transit WHERE city_name = '" + city + "' UNION SELECT "+data+" FROM goh_media_mall WHERE city_name = '" + city + "' UNION SELECT "+data+" FROM goh_media_airport WHERE city_name = '" + city + "'","gohoardi_goh",next)
             if(result){
                 // client.setEx(key,process.env.REDIS_TIMEOUT,JSON.stringify(result))
